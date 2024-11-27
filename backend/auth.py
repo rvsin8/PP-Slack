@@ -2,7 +2,7 @@ from flask import Blueprint, request, jsonify
 import bcrypt  # Import bcrypt for password hashing
 import jwt 
 import datetime # To set an expiration time for the JWT
-from models import db, User # Import db and User froms moderls.py
+from backend.models import db, User # Import db and User froms moderls.py
 import os
 
 # Create a blueprint for authentication-relates routes --> A Blueprint in Flask helps modularize your application by grouping related routes together. 

@@ -1,5 +1,5 @@
 from flask import Blueprint, request, jsonify # Core framework to define routes and handle HTTP requests
-from models import db, User, Channel, Message  # Import db from models.py
+from backend.models import db, User, Channel, Message  # Import db from models.py
 from flask import current_app as app
 
 message_bp = Blueprint('message', __name__)

@@ -1,10 +1,10 @@
 from flask import Flask
-from auth import auth_bp  # Import the blueprint from auth.py
+from backend.auth import auth_bp  # Import the blueprint from auth.py
 from flask_sqlalchemy import SQLAlchemy
-from message import message_bp  # Import the message blueprint from message.py
-from models import db  # Import db from models.py
-from channel import channel_bp  # Import the channel blueprint from channel.py
-from direct_message import direct_message_bp  # Import the direct message blueprint
+from backend.message import message_bp  # Import the message blueprint from message.py
+from backend.models import db  # Import db from models.py
+from backend.channel import channel_bp  # Import the channel blueprint from channel.py
+from backend.direct_message import direct_message_bp  # Import the direct message blueprint
 from flask_migrate import Migrate
 
 

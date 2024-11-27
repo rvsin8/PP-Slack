@@ -1,5 +1,5 @@
 from flask import Blueprint, request, jsonify
-from models import db, Channel, User, ChannelUser
+from backend.models import db, Channel, User, ChannelUser
   
 channel_bp = Blueprint('channel', __name__)
 
