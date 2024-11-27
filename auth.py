@@ -1,13 +1,14 @@
 from flask import Blueprint, request, jsonify
 import bcrypt  # Import bcrypt for password hashing
-import uuid # For generating a simple session token
+import jwt 
+import datetime # To set an expiration time for the JWT
+from models import db, User # Import db and User froms moderls.py
 
 # Create a blueprint for authentication-relates routes --> A Blueprint in Flask helps modularize your application by grouping related routes together. 
 # In this case, all authentication routes (like /register and /login) will belong to the auth blueprint.
 auth_bp = Blueprint('auth', __name__)
 
-# In-memory user store (to be replaced with database later)
-users = {}
+SECRET_KEY = '11'
 
 # User registration route
 @auth_bp.route('/register', methods=['POST'])
@@ -21,14 +22,16 @@ def register():
         return jsonify({'error': 'Username and password are required'}), 400
     
     # Check if the username is already taken
-    if username in users:
+    if User.query.filter_by(username=username).first():
         return jsonify({'error': 'Username already exists'}), 400
     
     # Hash the password before storing it
     hashed_password = bcrypt.hashpw(password.encode('utf-8'), bcrypt.gensalt())
+    user = User(username=username, password=hashed_password)
+
+    db.session.add(user)
+    db.session.commit()
     
-    # Store user in the in-memory dictionary
-    users[username] = hashed_password
     return jsonify({'message': f'User {username} registered successfully'}), 201
 
 
@@ -43,16 +46,12 @@ def login():
     if not username or not password:
         return jsonify({'error': 'Username and password are required'}), 400
     
-    # Check if the username is already taken
-    if username not in users:
-        return jsonify({'error': 'Invalid username or password'}), 400
+    user = User.query.filter_by(username=username).first()
 
-    # Verify the password
-    stored_password = users[username]
-
-    if not bcrypt.checkpw(password.encode('utf-8'), stored_password):
+    if not user or not bcrypt.checkpw(password.encode('utf-8'), user.password):
         return jsonify({'error': 'Invalid username or password'}), 401
 
-    # Generate simple session token
-    token = str(uuid.uuid4()) 
+    # Generate JWT token with expiration time
+    expiration_time = datetime.datetime.utcnow() + datetime.timedelta(hours=1) # Token expires in 1 hour
+    token = jwt.encode({'user_id': user.id, 'exp' : expiration_time}, SECRET_KEY, algorithm='HS256')
     return jsonify({'message': 'Login successful', 'token': token}), 200 

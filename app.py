@@ -1,6 +1,7 @@
 from flask import Flask # Core framework to define routes and handle HTTP requests
 from auth import auth_bp # Impoirt the blueprint from auth.py
 from flask_sqlalchemy import SQLAlchemy
+from models import db  # Import db from models.py
 
 app = Flask(__name__) # Creates instance of Flask class, __name__ tells Flask the location of the current python module.
 
@@ -9,7 +10,7 @@ app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://rav:new_password@localhost
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
 # Initialize SQLAlchemy
-db = SQLAlchemy(app)
+db.init_app(app) # Linking db object to the app
 
 # Register the auth blueprint
 app.register_blueprint(auth_bp)
