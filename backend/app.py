@@ -6,6 +6,7 @@ from backend.models import db  # Import db from models.py
 from backend.channel import channel_bp  # Import the channel blueprint from channel.py
 from backend.direct_message import direct_message_bp  # Import the direct message blueprint
 from flask_migrate import Migrate
+from auth import auth_bp  # Import the blueprint from auth.py
 
 
 app = Flask(__name__)

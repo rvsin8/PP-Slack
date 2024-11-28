@@ -5,6 +5,7 @@ import datetime # To set an expiration time for the JWT
 from backend.models import db, User # Import db and User froms moderls.py
 import os
 
+
 # Create a blueprint for authentication-relates routes --> A Blueprint in Flask helps modularize your application by grouping related routes together. 
 # In this case, all authentication routes (like /register and /login) will belong to the auth blueprint.
 auth_bp = Blueprint('auth', __name__)

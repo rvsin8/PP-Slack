@@ -1,5 +1,5 @@
 from flask import Blueprint, request, jsonify
-from models import db, User, DirectMessage
+from backend.models import db, User, DirectMessage
 
 direct_message_bp = Blueprint('direct_message', __name__)
 
