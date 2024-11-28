@@ -1,4 +1,3 @@
-// Add "use client" directive at the top of the file
 'use client';
 
 import { useState } from "react";
@@ -11,7 +10,7 @@ const Login = () => {
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
 
-  const handleSubmit = async (e) => {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
     try {

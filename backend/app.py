@@ -1,12 +1,11 @@
 from flask import Flask
 from flask_cors import CORS
 from flask_migrate import Migrate
-from backend.auth import auth_bp
-from backend.message import message_bp
-from backend.models import db
-from backend.channel import channel_bp
-from backend.direct_message import direct_message_bp
-
+from auth import auth_bp  # Import the blueprint from auth.py
+from message import message_bp  # Import the message blueprint from message.py
+from models import db  # Import db from models.py
+from channel import channel_bp  # Import the channel blueprint from channel.py
+from direct_message import direct_message_bp  # Import the direct message blueprint
 
 app = Flask(__name__)
 
