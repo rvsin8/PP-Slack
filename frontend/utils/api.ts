@@ -2,7 +2,7 @@
 
 export const fetchData = async (endpoint: string, options: RequestInit = {}): Promise<any> => {
   try {
-    const res = await fetch(`http://localhost:5000${endpoint}`, options);
+    const res = await fetch(`http://localhost:5001${endpoint}`, options);
     if (!res.ok) {
       throw new Error('Failed to fetch data');
     }

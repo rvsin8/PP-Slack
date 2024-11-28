@@ -9,7 +9,7 @@ from direct_message import direct_message_bp  # Import the direct message bluepr
 
 app = Flask(__name__)
 
-CORS(app)  # Allow all origins by default
+CORS(app, resources={r"/api/*": {"origins": "http://localhost:3000"}})  # Allow from localhost:3000
 
 # Configure PostgreSQL database
 app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://rav:new_password@localhost/slack_clone'
@@ -34,6 +34,6 @@ def home():
 if __name__ == "__main__":
     with app.app_context():
         db.create_all()
-    app.run(debug=True, host='0.0.0.0', port=5000)  # Changed to 5000
+    app.run(debug=True, host='0.0.0.0', port=5001)  # Changed to 5000
 
 
